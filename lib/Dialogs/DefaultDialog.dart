@@ -29,6 +29,7 @@ class DefaultDialog extends StatelessWidget {
     this.noResultsText,
     this.iconPackMode,
     this.customIconPack,
+    this.modalMargins
   }) : super(key: key);
 
   final bool? showSearchBar;
@@ -51,6 +52,7 @@ class DefaultDialog extends StatelessWidget {
   final String? noResultsText;
   final List<IconPack>? iconPackMode;
   final Map<String, IconData>? customIconPack;
+  final EdgeInsets? modalMargins;
 
   @override
   Widget build(BuildContext context) {
@@ -144,58 +146,61 @@ class DefaultDialog extends StatelessWidget {
         ),
       );
     } else {
-      return AlertDialog(
-        backgroundColor: backgroundColor,
-        shape: iconPickerShape,
-        title: DefaultTextStyle(
-          child: title!,
-          style: TextStyle(
-            color: ColorBrightness(backgroundColor!).isLight()
-                ? Colors.black
-                : Colors.white,
-            fontSize: 20,
-          ),
-        ),
-        content: Container(
-          constraints: constraints,
-          child: Column(
-            children: <Widget>[
-              if (showSearchBar!)
-                SearchBar(
-                  iconPack: iconPackMode,
-                  customIconPack: customIconPack,
-                  searchIcon: searchIcon,
-                  searchClearIcon: searchClearIcon,
-                  searchHintText: searchHintText,
-                  backgroundColor: backgroundColor,
-                ),
-              Expanded(
-                child: IconPicker(
-                  showTooltips: showTooltips,
-                  iconPack: iconPackMode,
-                  customIconPack: customIconPack,
-                  iconColor: iconColor,
-                  backgroundColor: backgroundColor,
-                  noResultsText: noResultsText,
-                  iconSize: iconSize,
-                  mainAxisSpacing: mainAxisSpacing,
-                  crossAxisSpacing: crossAxisSpacing,
-                ),
-              ),
-            ],
-          ),
-        ),
-        actions: [
-          TextButton(
-            style: ButtonStyle(
-              padding: MaterialStateProperty.resolveWith(
-                (states) => const EdgeInsets.symmetric(horizontal: 20),
-              ),
+      return Container(
+        margin: modalMargins != null ? modalMargins : null,
+        child: AlertDialog(
+          backgroundColor: backgroundColor,
+          shape: iconPickerShape,
+          title: DefaultTextStyle(
+            child: title!,
+            style: TextStyle(
+              color: ColorBrightness(backgroundColor!).isLight()
+                  ? Colors.black
+                  : Colors.white,
+              fontSize: 20,
             ),
-            onPressed: () => Navigator.of(context).pop(),
-            child: closeChild!,
           ),
-        ],
+          content: Container(
+            constraints: constraints,
+            child: Column(
+              children: <Widget>[
+                if (showSearchBar!)
+                  SearchBar(
+                    iconPack: iconPackMode,
+                    customIconPack: customIconPack,
+                    searchIcon: searchIcon,
+                    searchClearIcon: searchClearIcon,
+                    searchHintText: searchHintText,
+                    backgroundColor: backgroundColor,
+                  ),
+                Expanded(
+                  child: IconPicker(
+                    showTooltips: showTooltips,
+                    iconPack: iconPackMode,
+                    customIconPack: customIconPack,
+                    iconColor: iconColor,
+                    backgroundColor: backgroundColor,
+                    noResultsText: noResultsText,
+                    iconSize: iconSize,
+                    mainAxisSpacing: mainAxisSpacing,
+                    crossAxisSpacing: crossAxisSpacing,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              style: ButtonStyle(
+                padding: MaterialStateProperty.resolveWith(
+                  (states) => const EdgeInsets.symmetric(horizontal: 20),
+                ),
+              ),
+              onPressed: () => Navigator.of(context).pop(),
+              child: closeChild!,
+            ),
+          ],
+        ),
       );
     }
   }

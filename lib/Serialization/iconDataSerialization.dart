@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconpicker/IconPicker/Packs/Cupertino.dart'
     as Cupertino;
-import 'package:flutter_iconpicker/IconPicker/Packs/FontAwesome.dart'
-    as FontAwesome;
 import 'package:flutter_iconpicker/IconPicker/Packs/LineIcons.dart'
     as LineAwesome;
 import 'package:flutter_iconpicker/IconPicker/Packs/Material.dart' as Material;
@@ -15,8 +13,6 @@ Map<String, dynamic>? serializeIcon(IconData icon, {IconPack? iconPack}) {
       iconPack = IconPack.material;
     else if (icon.fontFamily == "CupertinoIcons")
       iconPack = IconPack.cupertino;
-    else if (icon.fontPackage == "font_awesome_flutter")
-      iconPack = IconPack.fontAwesomeIcons;
     else if (icon.fontPackage == "line_awesome_flutter")
       iconPack = IconPack.lineAwesomeIcons;
     else
@@ -32,11 +28,6 @@ Map<String, dynamic>? serializeIcon(IconData icon, {IconPack? iconPack}) {
       return {
         'pack': "cupertino",
         'key': _getIconKey(Cupertino.cupertinoIcons, icon),
-      };
-    case IconPack.fontAwesomeIcons:
-      return {
-        'pack': "fontAwesomeIcons",
-        'key': _getIconKey(FontAwesome.fontAwesomeIcons, icon),
       };
     case IconPack.lineAwesomeIcons:
       return {
@@ -67,8 +58,6 @@ IconData? deserializeIcon(Map<String, dynamic> iconMap) {
         return Material.icons[iconKey];
       case "cupertino":
         return Cupertino.cupertinoIcons[iconKey];
-      case "fontAwesomeIcons":
-        return FontAwesome.fontAwesomeIcons[iconKey];
       case "lineAwesomeIcons":
         return LineAwesome.lineAwesomeIcons[iconKey];
       case "custom":
