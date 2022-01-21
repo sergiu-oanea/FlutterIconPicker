@@ -7,30 +7,30 @@ import '../IconPicker/searchBar.dart';
 import '../Models/IconPack.dart';
 
 class DefaultDialog extends StatelessWidget {
-  const DefaultDialog({
-    Key? key,
-    this.showSearchBar,
-    this.routedView = false,
-    this.adaptive = false,
-    this.showTooltips,
-    this.barrierDismissible,
-    this.iconSize,
-    this.iconColor,
-    this.mainAxisSpacing,
-    this.crossAxisSpacing,
-    this.iconPickerShape,
-    this.backgroundColor,
-    this.constraints,
-    this.title,
-    this.closeChild,
-    this.searchIcon,
-    this.searchHintText,
-    this.searchClearIcon,
-    this.noResultsText,
-    this.iconPackMode,
-    this.customIconPack,
-    this.modalMargins
-  }) : super(key: key);
+  const DefaultDialog(
+      {Key? key,
+      this.showSearchBar,
+      this.routedView = false,
+      this.adaptive = false,
+      this.showTooltips,
+      this.barrierDismissible,
+      this.iconSize,
+      this.iconColor,
+      this.mainAxisSpacing,
+      this.crossAxisSpacing,
+      this.iconPickerShape,
+      this.backgroundColor,
+      this.constraints,
+      this.title,
+      this.closeChild,
+      this.searchIcon,
+      this.searchHintText,
+      this.searchClearIcon,
+      this.noResultsText,
+      this.iconPackMode,
+      this.customIconPack,
+      this.modalMargins})
+      : super(key: key);
 
   final bool? showSearchBar;
   final bool routedView;
@@ -81,12 +81,7 @@ class DefaultDialog extends StatelessWidget {
         child: Scaffold(
           backgroundColor: backgroundColor,
           body: Padding(
-            padding: EdgeInsets.only(
-              top: 10,
-              bottom: 20,
-              left: 20,
-              right: 20,
-            ),
+            padding: EdgeInsets.all(24),
             child: Column(
               children: <Widget>[
                 Container(
@@ -94,16 +89,13 @@ class DefaultDialog extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Padding(
-                        padding: EdgeInsets.only(left: 6),
-                        child: DefaultTextStyle(
-                          child: title!,
-                          style: TextStyle(
-                            color: ColorBrightness(backgroundColor!).isLight()
-                                ? Colors.black
-                                : Colors.white,
-                            fontSize: 20,
-                          ),
+                      DefaultTextStyle(
+                        child: title!,
+                        style: TextStyle(
+                          color: ColorBrightness(backgroundColor!).isLight()
+                              ? Colors.black
+                              : Colors.white,
+                          fontSize: 20,
                         ),
                       ),
                       IconButton(
@@ -126,6 +118,7 @@ class DefaultDialog extends StatelessWidget {
                     searchClearIcon: searchClearIcon,
                     searchHintText: searchHintText,
                     backgroundColor: backgroundColor,
+                    iconColor: iconColor,
                   ),
                 Expanded(
                   child: IconPicker(
@@ -160,6 +153,7 @@ class DefaultDialog extends StatelessWidget {
               fontSize: 20,
             ),
           ),
+          actionsPadding: EdgeInsets.all(16),
           content: Container(
             constraints: constraints,
             child: Column(
@@ -172,6 +166,7 @@ class DefaultDialog extends StatelessWidget {
                     searchClearIcon: searchClearIcon,
                     searchHintText: searchHintText,
                     backgroundColor: backgroundColor,
+                    iconColor: iconColor,
                   ),
                 Expanded(
                   child: IconPicker(
@@ -193,7 +188,7 @@ class DefaultDialog extends StatelessWidget {
             TextButton(
               style: ButtonStyle(
                 padding: MaterialStateProperty.resolveWith(
-                  (states) => const EdgeInsets.symmetric(horizontal: 20),
+                  (states) => const EdgeInsets.symmetric(horizontal: 32),
                 ),
               ),
               onPressed: () => Navigator.of(context).pop(),

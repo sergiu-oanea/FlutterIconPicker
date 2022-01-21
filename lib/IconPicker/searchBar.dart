@@ -16,6 +16,7 @@ class SearchBar extends StatefulWidget {
     required this.searchIcon,
     required this.searchClearIcon,
     required this.backgroundColor,
+    required this.iconColor,
     this.customIconPack,
     Key? key,
   }) : super(key: key);
@@ -26,6 +27,7 @@ class SearchBar extends StatefulWidget {
   final Icon? searchIcon;
   final Icon? searchClearIcon;
   final Color? backgroundColor;
+  final Color? iconColor;
 
   static TextEditingController searchTextController = TextEditingController();
 
@@ -66,6 +68,7 @@ class _SearchBarState extends State<SearchBar> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      cursorColor: widget.iconColor,
       onChanged: (val) => _search(val),
       controller: SearchBar.searchTextController,
       style: TextStyle(
@@ -79,6 +82,12 @@ class _SearchBarState extends State<SearchBar> {
           color: ColorBrightness(widget.backgroundColor!).isLight()
               ? Colors.black54
               : Colors.white54,
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: widget.iconColor!,
+          ),
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
         ),
         hintText: widget.searchHintText,
         prefixIcon: widget.searchIcon,

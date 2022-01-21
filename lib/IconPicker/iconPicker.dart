@@ -108,63 +108,28 @@ class _IconPickerState extends State<IconPicker> {
                   itemBuilder: (context, index) {
                     var item = IconPicker.iconMap.entries.elementAt(index);
 
-                    return GestureDetector(
-                      onTap: () => Navigator.pop(context, item.value),
-                      child: widget.showTooltips!
-                          ? Tooltip(
-                              message: item.key,
-                              child: Icon(
+                    return MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: GestureDetector(
+                        onTap: () => Navigator.pop(context, item.value),
+                        child: widget.showTooltips!
+                            ? Tooltip(
+                                message: item.key,
+                                child: Icon(
+                                  item.value,
+                                  size: widget.iconSize,
+                                  color: widget.iconColor,
+                                ),
+                              )
+                            : Icon(
                                 item.value,
                                 size: widget.iconSize,
                                 color: widget.iconColor,
                               ),
-                            )
-                          : Icon(
-                              item.value,
-                              size: widget.iconSize,
-                              color: widget.iconColor,
-                            ),
+                      ),
                     );
                   }),
             ),
-          IgnorePointer(
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.lerp(
-                        Alignment.topCenter, Alignment.center, .05)!,
-                    colors: [
-                      widget.backgroundColor!,
-                      widget.backgroundColor!.withOpacity(.1),
-                    ],
-                    stops: [
-                      0.0,
-                      1.0
-                    ]),
-              ),
-              child: Container(),
-            ),
-          ),
-          IgnorePointer(
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.lerp(
-                        Alignment.bottomCenter, Alignment.center, .05)!,
-                    colors: [
-                      widget.backgroundColor!,
-                      widget.backgroundColor!.withOpacity(.1),
-                    ],
-                    stops: [
-                      0.0,
-                      1.0
-                    ]),
-              ),
-              child: Container(),
-            ),
-          ),
         ],
       ),
     );

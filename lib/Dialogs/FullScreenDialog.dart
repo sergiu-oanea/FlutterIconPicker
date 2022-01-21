@@ -45,10 +45,10 @@ class FullScreenDialog extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.only(
-            top: 10,
-            bottom: 20,
-            left: 20,
-            right: 20,
+            top: 0,
+            bottom: 16,
+            left: 16,
+            right: 16,
           ),
           child: Column(
             children: <Widget>[
@@ -57,26 +57,27 @@ class FullScreenDialog extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Padding(
-                      padding: EdgeInsets.only(left: 6),
-                      child: DefaultTextStyle(
-                        child: title!,
-                        style: TextStyle(
-                          color: ColorBrightness(backgroundColor!).isLight()
-                              ? Colors.black
-                              : Colors.white,
-                          fontSize: 20,
-                        ),
-                      ),
-                    ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.close,
+                    DefaultTextStyle(
+                      child: title!,
+                      style: TextStyle(
                         color: ColorBrightness(backgroundColor!).isLight()
                             ? Colors.black
                             : Colors.white,
+                        fontSize: 32,
                       ),
-                      onPressed: () => Navigator.pop(context),
+                    ),
+                    Container(
+                      transform: Matrix4.translationValues(12.0, 0.0, 0.0),
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.close,
+                          color: ColorBrightness(backgroundColor!).isLight()
+                              ? Colors.black
+                              : Colors.white,
+                          size: 32,
+                        ),
+                        onPressed: () => Navigator.pop(context),
+                      ),
                     ),
                   ],
                 ),
@@ -89,6 +90,7 @@ class FullScreenDialog extends StatelessWidget {
                   searchClearIcon: searchClearIcon,
                   searchHintText: searchHintText,
                   backgroundColor: backgroundColor,
+                  iconColor: this.iconColor,
                 ),
               Expanded(
                 child: IconPicker(
